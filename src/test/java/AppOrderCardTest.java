@@ -3,9 +3,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppOrderCardTest {
 
@@ -23,21 +26,24 @@ public class AppOrderCardTest {
         options.addArguments("--no-sandbox");
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
-      // driver = new ChromeDriver();
     }
-//закрытие браузера, очистка за собой
+
+    //закрытие браузера, очистка за собой
     @AfterEach //после каждого теста
     public void teardown() {
         driver.quit();
         driver = null;
-        //if (driver != null) {
-          //  driver.quit();
-        }
+    }
 
     @Test
-    public void shouldSendApplication() {
+    public void shouldSendForm() {
         driver.get("http://localhost:9999");
-        System.out.println();
-
+        driver.findElement(By.cssSelector("[data-test-id='name']")).sendKeys(("Галина Иванова"));
+        driver.findElement(By.cssSelector("[data-test-id='phone']")).sendKeys(("+79278327485"));
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
+        driver.findElement(By.cssSelector("button")).click();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='name'].input_invalid .input__sub")).getText().trim();
+        String expected = "Поле обязательно для заполнения";
+        assertEquals(expected, actual);
     }
 }
