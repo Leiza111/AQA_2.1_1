@@ -50,16 +50,27 @@ public class AppOrderCardTest {
         assertEquals(expected, text);
     }
 
-        @Test
-        public void shouldSendValidForm2 () {
-            driver.get("http://localhost:9999");
-            driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("ффф ппп");
-            driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79388758954");
-            driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
-            driver.findElement(By.cssSelector("button")).click();
-            String text = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText().trim();
-            String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-            assertEquals(expected, text);
-
-        }
+    @Test
+    public void shouldSendValidForm2() {
+        driver.get("http://localhost:9999");
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("ффф ппп");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79388758954");
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
+        driver.findElement(By.cssSelector("button")).click();
+        String text = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText().trim();
+        String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
+        assertEquals(expected, text);
     }
+
+    @Test
+    public void shouldSendValidFormHyphen() {
+        driver.get("http://localhost:9999");
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Мамин-Сибиряк");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79388758954");
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
+        driver.findElement(By.cssSelector("button")).click();
+        String text = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText().trim();
+        String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
+        assertEquals(expected, text);
+    }
+}
