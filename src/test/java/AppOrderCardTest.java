@@ -25,10 +25,10 @@ public class AppOrderCardTest {
     @BeforeEach //перед каждым тестом
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--disable-dev-shm-usage");
-//        options.addArguments("--no-sandbox");
-//        options.addArguments("--headless");
-        driver = new ChromeDriver();
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--headless");
+        driver = new ChromeDriver(options);
     }
 
     //закрытие браузера, очистка за собой
