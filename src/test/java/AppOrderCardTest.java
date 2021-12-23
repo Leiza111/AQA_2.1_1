@@ -41,16 +41,14 @@ public class AppOrderCardTest {
     @Test
     public void shouldSendForm() {
         driver.get("http://localhost:9999");
-//        driver.findElement().sendKeys("Ольга Иванова");
-//        driver.findElement().sendKeys("+79388758954");
-        List<WebElement> textFields = driver.findElements(By.className("input__control"));
-        textFields.get(0).sendKeys("Ольга Иванова");
-        textFields.get(1).sendKeys("+79388758954");
-        driver.findElement(By.className("checkbox__text")).click();
-        driver.findElement(By.tagName("button")).click();
-        String text = driver.findElement(By.className("order-success")).getText();
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Ольга Иванова");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79388758954");
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
+        driver.findElement(By.cssSelector("button")).click();
+        String text = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText().trim();
         String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-        assertEquals(expected, text);
+        assertEquals(expected,text);
+
 
 
 //        driver.findElement(By.cssSelector("[data-test-id='name']")).sendKeys("Галина Иванова");
