@@ -40,7 +40,7 @@ public class AppOrderCardTest {
 
     @Test
     public void shouldSendForm() {
-        driver.get("http://localhost:9999/");
+        driver.get("http://localhost:9999");
 //        driver.findElement().sendKeys("Ольга Иванова");
 //        driver.findElement().sendKeys("+79388758954");
         List<WebElement> textFields = driver.findElements(By.className("input__control"));
